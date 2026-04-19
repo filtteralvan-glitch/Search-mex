@@ -1,116 +1,269 @@
-// data.js - Seluruh data pemanggilan wisudawan 2026
-const wisudaData = {
-  "F-1": {
-    wali: "M. Dimaz Fitransyah, S.Pd.",
-    total: 36,
-    putra: 30,
-    putri: 6,
-    students: [
-      { no: 1, induk: "1911", nama: "Aditya Bagus Setyawan", gender: "L", ortu: "Basori", univ: "", jurusan: "" },
-      { no: 2, induk: "1915", nama: "Afiq Dhiaururrahman Rizqi", gender: "L", ortu: "Agus Mulyanto (Alm)", univ: "", jurusan: "" },
-      { no: 3, induk: "1918", nama: "Ahmad Rizky Ardiansyah", gender: "L", ortu: "Khairul Ansory", univ: "", jurusan: "" },
-      { no: 4, induk: "1948", nama: "Arya Alfatarof", gender: "L", ortu: "Supriyadi", univ: "Politeknik Energi Dan Mineral Akamigas", jurusan: "D4 Logistik Minyak Dan Gas" },
-      { no: 5, induk: "1961", nama: "Baruna Tri Cahya Amaris", gender: "L", ortu: "Subandi (Alm)", univ: "", jurusan: "" },
-      { no: 6, induk: "1962", nama: "Bima Sandy Ibrahim", gender: "L", ortu: "Didin Yuni Yanto", univ: "", jurusan: "" },
-      { no: 7, induk: "1965", nama: "Candra Bekti Laksono Putro", gender: "L", ortu: "Sutoyo (Alm)", univ: "", jurusan: "" },
-      { no: 8, induk: "1967", nama: "Chintya Alifya Ramadhani", gender: "P", ortu: "Mohamad Rofiq", univ: "Universitas Negeri Surabaya", jurusan: "S1 Matematika" },
-      { no: 9, induk: "1971", nama: "Daffa Haiyun Qobus", gender: "L", ortu: "Hari Widiantoro", univ: "", jurusan: "" },
-      { no: 10, induk: "1972", nama: "Danendra Nawa Pramudito", gender: "L", ortu: "Widiatmoko", univ: "", jurusan: "" },
-      { no: 11, induk: "1984", nama: "Dhimaz Bayu Ramadhan", gender: "L", ortu: "Suyono", univ: "", jurusan: "" },
-      { no: 12, induk: "1987", nama: "Dyah Ayu Anggraeni Puspa Dewi", gender: "P", ortu: "Nugroho Djoyo Mulyono", univ: "", jurusan: "" },
-      { no: 13, induk: "1999", nama: "Fariel Hamdan Maulana", gender: "L", ortu: "Dian Widodo S.H", univ: "", jurusan: "" },
-      { no: 14, induk: "2004", nama: "Galang Anugrah Santara", gender: "L", ortu: "Hadi Sumarto (Alm)", univ: "", jurusan: "" },
-      { no: 15, induk: "2016", nama: "Hasbi Zulfian Idris", gender: "L", ortu: "Idris Dapat", univ: "", jurusan: "" },
-      { no: 16, induk: "2035", nama: "Keisya Tarentia Artya Putri", gender: "P", ortu: "Warsono (Alm)", univ: "", jurusan: "" },
-      { no: 17, induk: "2045", nama: "M Firmansyah", gender: "L", ortu: "Herlansyah", univ: "Institut Teknologi Sepuluh Nopember", jurusan: "S1 Teknik Transportasi Laut" },
-      { no: 18, induk: "2048", nama: "M. Hafiz Ramadhan", gender: "L", ortu: "Misnan", univ: "", jurusan: "" },
-      { no: 19, induk: "2051", nama: "M. Ramadhani Pratama", gender: "L", ortu: "Didiek Ismaya", univ: "", jurusan: "" },
-      { no: 20, induk: "2071", nama: "Muhammad Dava Alfarizi", gender: "L", ortu: "Ading", univ: "", jurusan: "" },
-      { no: 21, induk: "2075", nama: "Muhammad Arvarel Putra Anggara", gender: "L", ortu: "Pitono", univ: "", jurusan: "" },
-      { no: 22, induk: "2077", nama: "Muhammad Faisal Avirnas", gender: "L", ortu: "Suyanto", univ: "", jurusan: "" },
-      { no: 23, induk: "2092", nama: "Mukhammad Revaleyza Akbar", gender: "L", ortu: "Mukhamad Taufiq", univ: "", jurusan: "" },
-      { no: 24, induk: "2108", nama: "Naufal Rizqy Pramudya", gender: "L", ortu: "Aries Tri Wahono", univ: "", jurusan: "" },
-      { no: 25, induk: "2117", nama: "Pradika Satya Dinata", gender: "L", ortu: "Rudiyanto", univ: "", jurusan: "" },
-      { no: 26, induk: "2127", nama: "Rafied Maulana Faqieh Putra Rahman", gender: "L", ortu: "Moh Samsir Rahman", univ: "", jurusan: "" },
-      { no: 27, induk: "2133", nama: "Ramadhan Putra Hidayat", gender: "L", ortu: "Rachmat Hidayat", univ: "", jurusan: "" },
-      { no: 28, induk: "2148", nama: "Robby Dwi Nurcahyo", gender: "L", ortu: "Marsalib", univ: "", jurusan: "" },
-      { no: 29, induk: "2153", nama: "Safira Tiara Devi", gender: "P", ortu: "Turmudji", univ: "UPN Veteran Jawa Timur", jurusan: "S1 Desain Komunikasi Visual" },
-      { no: 30, induk: "2154", nama: "Saifullah Perwira Widyadhana Nugraha", gender: "L", ortu: "Eko Soeharno, S.E", univ: "Poltekkes Kemenkes Surabaya", jurusan: "D4 Keperawatan" },
-      { no: 31, induk: "2156", nama: "Salvia Nabilah Putri Nugroho", gender: "P", ortu: "Ari Wahyu Nugroho", univ: "", jurusan: "" },
-      { no: 32, induk: "2159", nama: "Satria Dwi Jasista", gender: "L", ortu: "Indah Istikarini", univ: "", jurusan: "" },
-      { no: 33, induk: "2174", nama: "Vidalillah Lestari", gender: "P", ortu: "Cahyo Abadi", univ: "", jurusan: "" },
-      { no: 34, induk: "2181", nama: "Yanindra Adiwidya", gender: "L", ortu: "Miyanto Yanuari", univ: "", jurusan: "" },
-      { no: 35, induk: "2183", nama: "Yoga Pratama Putra Andrian", gender: "L", ortu: "Andrik Wawan Koko", univ: "", jurusan: "" },
-      { no: 36, induk: "2186", nama: "Yufan Arrahman", gender: "L", ortu: "Andi Lala", univ: "", jurusan: "" }
-    ]
-  },
-  "F-2": {
-    wali: "Gita Yusanti, S.Pd.",
-    total: 36,
-    putra: 20,
-    putri: 16,
-    students: [
-      { no: 1, induk: "1908", nama: "Abdul Khayyi", gender: "L", ortu: "Bukhori", univ: "", jurusan: "" },
-      { no: 2, induk: "1909", nama: "Ach. Maulana Shifa", gender: "L", ortu: "Moch. Sunarto", univ: "", jurusan: "" },
-      { no: 3, induk: "1912", nama: "Aditya Ramadhan Hidayat", gender: "L", ortu: "Fatah Hidayat", univ: "", jurusan: "" },
-      { no: 4, induk: "1917", nama: "Agwe Cantika Ramadhani", gender: "P", ortu: "Agus Purwanto", univ: "Universitas Negeri Yogyakarta", jurusan: "D4 Pengobatan Tradisional Indonesia" },
-      { no: 5, induk: "1920", nama: "Aisyah Indriyani Puspitasari", gender: "P", ortu: "Mudiyono", univ: "", jurusan: "" },
-      { no: 6, induk: "1926", nama: "Alsya Alisia", gender: "P", ortu: "Anang Wijayanto", univ: "", jurusan: "" },
-      { no: 7, induk: "1932", nama: "Anastasya Eka Putri Ramadani", gender: "P", ortu: "Moh. Nadir", univ: "", jurusan: "" },
-      { no: 8, induk: "1957", nama: "Azizah Tri Jayanti", gender: "P", ortu: "Suhanto", univ: "Universitas Trunojoyo Madura", jurusan: "S1 Psikologi" },
-      { no: 9, induk: "1963", nama: "Bintang Kautsar", gender: "L", ortu: "Arif Mawardi", univ: "", jurusan: "" },
-      { no: 10, induk: "1970", nama: "Clara Salsa Isabella", gender: "P", ortu: "Sumali", univ: "Universitas Trunojoyo Madura", jurusan: "S1 Ilmu Kelautan" },
-      { no: 11, induk: "1973", nama: "Danindya Raihan Aditama", gender: "L", ortu: "Simun", univ: "", jurusan: "" },
-      { no: 12, induk: "1977", nama: "Davin Trianggara Wijaya", gender: "L", ortu: "Suhariyoto", univ: "", jurusan: "" },
-      { no: 13, induk: "1978", nama: "Dea Nisrina Marmora", gender: "P", ortu: "Imansyah", univ: "", jurusan: "" },
-      { no: 14, induk: "2006", nama: "Gavriela Fairizki Yusril Fairuz Dzaki", gender: "L", ortu: "Ir. Jusuf Seno Santoso", univ: "", jurusan: "" },
-      { no: 15, induk: "2007", nama: "Gede Sutrisna Dananjaya", gender: "L", ortu: "I Made Sudiarjana", univ: "", jurusan: "" },
-      { no: 16, induk: "2018", nama: "I Kadek Adi Arya Wicaksana", gender: "L", ortu: "I Wayan Putu Mandiarta", univ: "", jurusan: "" },
-      { no: 17, induk: "2019", nama: "I Made Arya Anom Wicaksana Sastra", gender: "L", ortu: "I Wayan Oka Sugiartana", univ: "", jurusan: "" },
-      { no: 18, induk: "2020", nama: "I Made Gede Adhika Putra Surendra", gender: "L", ortu: "Sumarno Hadi Santoso", univ: "", jurusan: "" },
-      { no: 19, induk: "2037", nama: "Khamilah Saarah Haafidzah Yusroni", gender: "P", ortu: "M. Asep Yusroni", univ: "Universitas Negeri Malang", jurusan: "S1 Pendidikan Kimia" },
-      { no: 20, induk: "2042", nama: "Ksatria Bayu Putra Nugraha", gender: "L", ortu: "Budi Purnomo", univ: "", jurusan: "" },
-      { no: 21, induk: "2054", nama: "Malvino Mahardian Rochman", gender: "L", ortu: "Fatchur Rochman", univ: "", jurusan: "" },
-      { no: 22, induk: "2057", nama: "Miken Putra Wijayakusuma", gender: "L", ortu: "Jayadi", univ: "", jurusan: "" },
-      { no: 23, induk: "2065", nama: "Mohammad Fabyan Adriansyah", gender: "L", ortu: "Sugiono", univ: "", jurusan: "" },
-      { no: 24, induk: "2080", nama: "Muhammad Hasballah", gender: "L", ortu: "Abdul Charies", univ: "Politeknik Perkapalan Negeri Surabaya", jurusan: "D4 Teknik Kelistrikan Kapal" },
-      { no: 25, induk: "2090", nama: "Muhammad Saabiq Ghora Satria", gender: "L", ortu: "Marijan", univ: "Universitas Trunojoyo Madura", jurusan: "S1 Agroekoteknologi" },
-      { no: 26, induk: "2094", nama: "Mutia Evelyn", gender: "P", ortu: "Anton Hariyono", univ: "", jurusan: "" },
-      { no: 27, induk: "2096", nama: "Nabila Arissa Putri", gender: "P", ortu: "Munadi", univ: "", jurusan: "" },
-      { no: 28, induk: "2192", nama: "Nafiisah Anindya Khairunnisa", gender: "P", ortu: "Rudi Hartono", univ: "", jurusan: "" },
-      { no: 29, induk: "2107", nama: "Naufal Azam Falah", gender: "L", ortu: "Bambang Harianto", univ: "", jurusan: "" },
-      { no: 30, induk: "2112", nama: "Ni Wayan Tiara Damayanti", gender: "P", ortu: "I Wayan Sukarena", univ: "", jurusan: "" },
-      { no: 31, induk: "2128", nama: "Rahmat Wahyudi", gender: "L", ortu: "Supardi", univ: "UPN Veteran Jawa Timur", jurusan: "S1 Hukum" },
-      { no: 32, induk: "2139", nama: "Rendra Fernanda Sencoko", gender: "L", ortu: "Dony Sencoko", univ: "", jurusan: "" },
-      { no: 33, induk: "2141", nama: "Revi Marischa", gender: "P", ortu: "Feri Isdian", univ: "Politeknik Negeri Jember", jurusan: "D4 Manajemen Informasi Kesehatan" },
-      { no: 34, induk: "2152", nama: "Safira Dyah Pembayun", gender: "P", ortu: "Imam Safi'i", univ: "", jurusan: "" },
-      { no: 35, induk: "2182", nama: "Yesi Indra Purnamasari", gender: "P", ortu: "Nur Kholis", univ: "", jurusan: "" },
-      { no: 36, induk: "2184", nama: "Yolan Ghea Ifna", gender: "P", ortu: "M. Jumadi Ekotarnia S.H", univ: "Universitas Negeri Malang", jurusan: "S1 Gizi" }
-    ]
-  },
-  "F-3": {
-    wali: "Alifah Febri Khairina, S.Pd.",
-    total: 36,
-    putra: 21,
-    putri: 15,
-    students: [
-      { no: 1, induk: "1927", nama: "Alvin Wahyu Ainurrohman", gender: "L", ortu: "Nuryadi", univ: "", jurusan: "" },
-      { no: 2, induk: "1931", nama: "Anas Natasya Bilqis", gender: "P", ortu: "Anwar Anas", univ: "", jurusan: "" },
-      { no: 3, induk: "1942", nama: "Aprilia Khaula Al-Adawiyah", gender: "P", ortu: "Rochmajudi Kustanto, S.H.", univ: "Poltekkes Kemenkes Malang", jurusan: "D3 Rekam Medis Dan Informasi Kesehatan" },
-      { no: 4, induk: "1947", nama: "Artito Wahyudipta Judistira", gender: "L", ortu: "Aris Murtono", univ: "", jurusan: "" },
-      { no: 5, induk: "1949", nama: "Arya Deni Lisdiansyah", gender: "L", ortu: "Dedy Setiono", univ: "", jurusan: "" },
-      { no: 6, induk: "1953", nama: "Aura Brilian Noviyanti", gender: "P", ortu: "Ali Sodiqin", univ: "UPN Veteran Yogyakarta", jurusan: "S1 Teknik Geomatika" },
-      { no: 7, induk: "1958", nama: "Azka Ainazar Zamzami", gender: "L", ortu: "Nasrulloh Baihaqi", univ: "", jurusan: "" },
-      { no: 8, induk: "1964", nama: "Briva Rizky Maulana Irwanto", gender: "L", ortu: "Bambang Irwanto", univ: "", jurusan: "" },
-      { no: 9, induk: "1975", nama: "Dava Ariatna Alfarezhi", gender: "L", ortu: "Muhamad Aminin M", univ: "", jurusan: "" },
-      { no: 10, induk: "1990", nama: "Elsa Dwi Chintia Putri", gender: "P", ortu: "Budi Teguh Santoso", univ: "", jurusan: "" },
-      { no: 11, induk: "1991", nama: "Elza Revania Putri", gender: "P", ortu: "Zaenal Abidin", univ: "Institut Teknologi Sepuluh Nopember", jurusan: "S1 Teknologi Kedokteran" },
-      { no: 12, induk: "1993", nama: "Fabio Nuki Eka Saputra", gender: "L", ortu: "Suhartono", univ: "", jurusan: "" },
-      { no: 13, induk: "1998", nama: "Farhesa Adila Nugroho", gender: "L", ortu: "Catur Kurnia Adi", univ: "", jurusan: "" },
-      { no: 14, induk: "2011", nama: "Hafidz Rizky Romadoni", gender: "L", ortu: "Iid Nastajib", univ: "", jurusan: "" },
-      { no: 15, induk: "2013", nama: "Hanif Rasik Hakim", gender: "L", ortu: "Yamto Mulyono", univ: "Universitas Airlangga", jurusan: "S1 Keperawatan" },
-      { no: 16, induk: "2029", nama: "Joice Bella Indriantika", gender: "P", ortu: "Johan Susilo", univ: "", jurusan: "" },
-      { no: 17, induk: "2034", nama: "Kayla Bilqis Arthalia", gender: "P", ortu: "Suwana Budi", univ: "", jurusan: "" },
+// ======================== DATA SISWA ========================
+const students = [
+  { nis: "001", nama: "Ahmad Fauzi", kelas: "XII MIPA 1", gender: "L", universitas: "ITS", jurusan: "Teknik Informatika" },
+  { nis: "002", nama: "Budi Santoso", kelas: "XII MIPA 1", gender: "L", universitas: "Universitas Brawijaya", jurusan: "Sistem Informasi" },
+  { nis: "003", nama: "Citra Dewi", kelas: "XII MIPA 1", gender: "P", universitas: "Unair", jurusan: "Farmasi" },
+  { nis: "004", nama: "Dian Permatasari", kelas: "XII MIPA 2", gender: "P", universitas: "ITS", jurusan: "Teknik Kimia" },
+  { nis: "005", nama: "Eka Prasetya", kelas: "XII MIPA 2", gender: "L", universitas: "Universitas Gadjah Mada", jurusan: "Teknik Mesin" },
+  { nis: "006", nama: "Fajar Nugroho", kelas: "XII MIPA 2", gender: "L", universitas: "Universitas Negeri Surabaya", jurusan: "Pendidikan Matematika" },
+  { nis: "007", nama: "Gita Rahayu", kelas: "XII MIPA 3", gender: "P", universitas: "Unair", jurusan: "Kedokteran" },
+  { nis: "008", nama: "Hendra Wijaya", kelas: "XII MIPA 3", gender: "L", universitas: "ITS", jurusan: "Teknik Elektro" },
+  { nis: "009", nama: "Indah Lestari", kelas: "XII MIPA 3", gender: "P", universitas: "Universitas Brawijaya", jurusan: "Manajemen" },
+  { nis: "010", nama: "Joko Susilo", kelas: "XII IPS 1", gender: "L", universitas: "Universitas Airlangga", jurusan: "Ilmu Hukum" },
+  { nis: "011", nama: "Kartika Sari", kelas: "XII IPS 1", gender: "P", universitas: "Universitas Negeri Malang", jurusan: "Psikologi" },
+  { nis: "012", nama: "Lukman Hakim", kelas: "XII IPS 1", gender: "L", universitas: "UIN Sunan Ampel", jurusan: "Ekonomi Syariah" },
+  { nis: "013", nama: "Maya Sari", kelas: "XII IPS 2", gender: "P", universitas: "Universitas Brawijaya", jurusan: "Ilmu Komunikasi" },
+  { nis: "014", nama: "Nanda Pratama", kelas: "XII IPS 2", gender: "L", universitas: "", jurusan: "" },
+  { nis: "015", nama: "Oktavia Dewi", kelas: "XII IPS 2", gender: "P", universitas: "Universitas Negeri Surabaya", jurusan: "Pendidikan Bahasa Inggris" },
+  { nis: "016", nama: "Putra Ardiansyah", kelas: "XII MIPA 1", gender: "L", universitas: "", jurusan: "" },
+  { nis: "017", nama: "Rina Melati", kelas: "XII MIPA 2", gender: "P", universitas: "ITS", jurusan: "Teknik Lingkungan" },
+  { nis: "018", nama: "Sandi Hermawan", kelas: "XII MIPA 3", gender: "L", universitas: "Universitas Gadjah Mada", jurusan: "Fisika" },
+  { nis: "019", nama: "Tia Anggraini", kelas: "XII IPS 1", gender: "P", universitas: "Universitas Airlangga", jurusan: "Administrasi Publik" },
+  { nis: "020", nama: "Umar Zaki", kelas: "XII IPS 2", gender: "L", universitas: "", jurusan: "" }
+];
+
+// Data kelas unik & wali kelas (untuk footer)
+const kelasData = {
+  "XII MIPA 1": { wali: "Bu Siti, M.Pd.", jumlah: students.filter(s => s.kelas === "XII MIPA 1").length },
+  "XII MIPA 2": { wali: "Pak Budi, S.Si.", jumlah: students.filter(s => s.kelas === "XII MIPA 2").length },
+  "XII MIPA 3": { wali: "Bu Dewi, M.Sc.", jumlah: students.filter(s => s.kelas === "XII MIPA 3").length },
+  "XII IPS 1": { wali: "Pak Eko, S.Pd.", jumlah: students.filter(s => s.kelas === "XII IPS 1").length },
+  "XII IPS 2": { wali: "Bu Rina, S.Sos.", jumlah: students.filter(s => s.kelas === "XII IPS 2").length }
+};
+
+// State
+let currentKelas = "all"; // 'all' atau nama kelas
+let currentGender = "all";
+let currentSearch = "";
+let currentPage = "all"; // 'all' atau 'ptn'
+
+// DOM Elements
+const splash = document.getElementById("splash");
+const pageAll = document.getElementById("page-all");
+const pagePtn = document.getElementById("page-ptn");
+const navButtons = document.querySelectorAll(".npill");
+const searchInput = document.getElementById("searchInput");
+const kelasContainer = document.getElementById("kelasFilterContainer");
+const infoKelasSpan = document.getElementById("infoKelas");
+const infoCountSpan = document.getElementById("infoCount");
+const cardsContainer = document.getElementById("cardsContainer");
+const tableBody = document.getElementById("tableBody");
+const ptnCardsContainer = document.getElementById("ptnCardsContainer");
+const statSiswa = document.getElementById("stat-siswa");
+const statPtn = document.getElementById("stat-ptn");
+const ptnCountBanner = document.getElementById("ptnCountBanner");
+const footerSiswa = document.getElementById("footerSiswa");
+const footerPtn = document.getElementById("footerPtn");
+const footerLk = document.getElementById("footerLk");
+const footerPr = document.getElementById("footerPr");
+const footerKelasList = document.getElementById("footerKelasList");
+
+// Helper: filter data berdasarkan state
+function getFilteredData() {
+  let filtered = [...students];
+  // Filter kelas
+  if (currentKelas !== "all") {
+    filtered = filtered.filter(s => s.kelas === currentKelas);
+  }
+  // Filter gender
+  if (currentGender !== "all") {
+    filtered = filtered.filter(s => s.gender === currentGender);
+  }
+  // Filter search (nama, nis, universitas)
+  if (currentSearch.trim() !== "") {
+    const searchLower = currentSearch.toLowerCase();
+    filtered = filtered.filter(s =>
+      s.nama.toLowerCase().includes(searchLower) ||
+      s.nis.includes(searchLower) ||
+      s.universitas.toLowerCase().includes(searchLower)
+    );
+  }
+  return filtered;
+}
+
+function getPtnData() {
+  return students.filter(s => s.universitas && s.universitas.trim() !== "");
+}
+
+// Render cards & table untuk halaman "Semua"
+function renderAll() {
+  const data = getFilteredData();
+  // Update info bar
+  let kelasDisplay = currentKelas === "all" ? "Semua Kelas" : currentKelas;
+  infoKelasSpan.innerText = kelasDisplay;
+  infoCountSpan.innerText = data.length;
+  
+  // Render cards
+  if (data.length === 0) {
+    cardsContainer.innerHTML = `<div class="empty"><div class="empty-ico"><i class="fas fa-user-graduate"></i></div><div class="empty-t">Tidak ada siswa ditemukan</div><div class="empty-s">Coba ubah filter atau kata kunci</div></div>`;
+  } else {
+    cardsContainer.innerHTML = data.map((s, idx) => `
+      <div class="sc">
+        <div class="sc-av" style="background: ${s.gender === 'L' ? 'linear-gradient(135deg,#38bdf8,#0284c7)' : 'linear-gradient(135deg,#f43f5e,#be123c)'}">${s.nama.charAt(0)}</div>
+        <div class="sc-body">
+          <div class="sc-name">${s.nama}</div>
+          <div class="sc-tags">
+            <span class="tag t-nis">NIS: ${s.nis}</span>
+            <span class="tag t-cls">${s.kelas}</span>
+            <span class="tag ${s.gender === 'L' ? 't-m' : 't-f'}">${s.gender === 'L' ? 'Laki-laki' : 'Perempuan'}</span>
+          </div>
+          <div class="sc-row"><i class="fas fa-university"></i><span class="sc-univ-txt">${s.universitas || 'Belum masuk PTN'}</span></div>
+          ${s.universitas ? `<div class="sc-row"><i class="fas fa-book-open"></i><span>${s.jurusan}</span></div>` : ''}
+        </div>
+      </div>
+    `).join('');
+  }
+  
+  // Render tabel
+  tableBody.innerHTML = data.map((s, idx) => `
+    <tr>
+      <td class="td-no">${idx+1}</td>
+      <td class="td-m">${s.nis}</td>
+      <td class="td-n">${s.nama}</td>
+      <td>${s.kelas}</td>
+      <td><span class="${s.gender === 'L' ? 'g-m' : 'g-f'}"><i class="fas ${s.gender === 'L' ? 'fa-mars' : 'fa-venus'}"></i> ${s.gender === 'L' ? 'Laki' : 'Perempuan'}</span></td>
+      <td>${s.universitas ? `<span class="univ-tag">${s.universitas}</span>` : '<span class="td-nil">—</span>'}</td>
+      <td>${s.jurusan || '<span class="td-nil">—</span>'}</td>
+    </tr>
+  `).join('');
+}
+
+// Render halaman PTN
+function renderPtn() {
+  const ptnStudents = getPtnData();
+  ptnCountBanner.innerText = ptnStudents.length;
+  if (ptnStudents.length === 0) {
+    ptnCardsContainer.innerHTML = `<div class="empty"><div class="empty-ico"><i class="fas fa-trophy"></i></div><div class="empty-t">Belum ada data PTN</div><div class="empty-s">Siswa yang diterima PTN akan muncul di sini</div></div>`;
+  } else {
+    ptnCardsContainer.innerHTML = ptnStudents.map(s => `
+      <div class="sc ptn">
+        <div class="sc-av" style="background: linear-gradient(135deg,#f59e0b,#b45309);">${s.nama.charAt(0)}</div>
+        <div class="sc-body">
+          <div class="sc-name">${s.nama}</div>
+          <div class="sc-tags">
+            <span class="tag t-nis">NIS: ${s.nis}</span>
+            <span class="tag t-cls">${s.kelas}</span>
+          </div>
+          <div class="sc-row"><i class="fas fa-university"></i><span class="sc-univ-txt" style="color:var(--amber)">${s.universitas}</span></div>
+          <div class="sc-row"><i class="fas fa-book-open"></i><span>${s.jurusan}</span></div>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+// Update semua tampilan & statistik global
+function updateAll() {
+  const totalSiswa = students.length;
+  const totalPtn = getPtnData().length;
+  const totalLaki = students.filter(s => s.gender === "L").length;
+  const totalPerempuan = students.filter(s => s.gender === "P").length;
+  
+  statSiswa.innerText = totalSiswa;
+  statPtn.innerText = totalPtn;
+  footerSiswa.innerText = totalSiswa;
+  footerPtn.innerText = totalPtn;
+  footerLk.innerText = totalLaki;
+  footerPr.innerText = totalPerempuan;
+  
+  if (currentPage === "all") {
+    renderAll();
+  } else {
+    renderPtn();
+  }
+}
+
+// Event handlers
+function onSearchInput(e) {
+  currentSearch = e.target.value;
+  updateAll();
+}
+
+function onKelasClick(kelas) {
+  currentKelas = kelas;
+  // Update active class pada tombol kelas
+  document.querySelectorAll(".ktab").forEach(btn => {
+    if (btn.dataset.kelas === kelas) btn.classList.add("on");
+    else btn.classList.remove("on");
+  });
+  updateAll();
+}
+
+function onGenderClick(gender) {
+  currentGender = gender;
+  document.querySelectorAll(".chip").forEach(chip => {
+    if (chip.dataset.gender === gender) chip.classList.add("active");
+    else chip.classList.remove("active");
+  });
+  updateAll();
+}
+
+function onNavClick(page) {
+  currentPage = page;
+  if (page === "all") {
+    pageAll.classList.remove("hidden");
+    pagePtn.classList.add("hidden");
+  } else {
+    pageAll.classList.add("hidden");
+    pagePtn.classList.remove("hidden");
+    renderPtn();
+  }
+  navButtons.forEach(btn => {
+    if (btn.dataset.page === page) btn.classList.add("on");
+    else btn.classList.remove("on");
+  });
+  updateAll(); // update statistik tetap
+}
+
+// Generate tombol kelas
+function generateKelasTabs() {
+  const kelasUnik = [...new Set(students.map(s => s.kelas))];
+  let html = `<button class="ktab on" data-kelas="all">Semua Kelas</button>`;
+  kelasUnik.forEach(kelas => {
+    html += `<button class="ktab" data-kelas="${kelas}">${kelas}</button>`;
+  });
+  kelasContainer.innerHTML = html;
+  document.querySelectorAll(".ktab").forEach(btn => {
+    btn.addEventListener("click", () => onKelasClick(btn.dataset.kelas));
+  });
+}
+
+// Generate footer kelas list
+function generateFooterKelas() {
+  let html = "";
+  for (const [kelas, info] of Object.entries(kelasData)) {
+    html += `<div class="fkelas"><div><div class="fk-name">${kelas}</div><div class="fk-wali">${info.wali}</div></div><div class="fk-cnt">${info.jumlah} siswa</div></div>`;
+  }
+  footerKelasList.innerHTML = html;
+}
+
+// Inisialisasi event listeners
+function init() {
+  generateKelasTabs();
+  generateFooterKelas();
+  
+  searchInput.addEventListener("input", onSearchInput);
+  document.querySelectorAll(".chip").forEach(chip => {
+    chip.addEventListener("click", () => onGenderClick(chip.dataset.gender));
+  });
+  navButtons.forEach(btn => {
+    btn.addEventListener("click", () => onNavClick(btn.dataset.page));
+  });
+  
+  // Set default active gender
+  currentGender = "all";
+  document.querySelector('.chip[data-gender="all"]').classList.add("active");
+  
+  updateAll();
+  
+  // Hilangkan splash setelah 0.8 detik
+  setTimeout(() => {
+    splash.classList.add("out");
+  }, 800);
+}
+
+// Start
+init();      { no: 17, induk: "2034", nama: "Kayla Bilqis Arthalia", gender: "P", ortu: "Suwana Budi", univ: "", jurusan: "" },
       { no: 18, induk: "2049", nama: "M. Haikal Alamhudi Dzulhaqqi", gender: "L", ortu: "Dedi Setiawan", univ: "", jurusan: "" },
       { no: 19, induk: "2063", nama: "Mochammad Rifan Afifi", gender: "L", ortu: "Zainul Afif", univ: "", jurusan: "" },
       { no: 20, induk: "2068", nama: "Muhamad Irfad Fandi Abdillah", gender: "L", ortu: "Imam Wahyudi", univ: "", jurusan: "" },
