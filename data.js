@@ -61,12 +61,15 @@ const footerKelasList = document.getElementById("footerKelasList");
 // Helper: filter data berdasarkan state
 function getFilteredData() {
   let filtered = [...students];
+  // Filter kelas
   if (currentKelas !== "all") {
     filtered = filtered.filter(s => s.kelas === currentKelas);
   }
+  // Filter gender
   if (currentGender !== "all") {
     filtered = filtered.filter(s => s.gender === currentGender);
   }
+  // Filter search (nama, nis, universitas)
   if (currentSearch.trim() !== "") {
     const searchLower = currentSearch.toLowerCase();
     filtered = filtered.filter(s =>
@@ -85,9 +88,12 @@ function getPtnData() {
 // Render cards & table untuk halaman "Semua"
 function renderAll() {
   const data = getFilteredData();
-  infoKelasSpan.innerText = currentKelas === "all" ? "Semua Kelas" : currentKelas;
+  // Update info bar
+  let kelasDisplay = currentKelas === "all" ? "Semua Kelas" : currentKelas;
+  infoKelasSpan.innerText = kelasDisplay;
   infoCountSpan.innerText = data.length;
   
+  // Render cards
   if (data.length === 0) {
     cardsContainer.innerHTML = `<div class="empty"><div class="empty-ico"><i class="fas fa-user-graduate"></i></div><div class="empty-t">Tidak ada siswa ditemukan</div><div class="empty-s">Coba ubah filter atau kata kunci</div></div>`;
   } else {
@@ -108,9 +114,156 @@ function renderAll() {
     `).join('');
   }
   
+  // Render tabel
   tableBody.innerHTML = data.map((s, idx) => `
     <tr>
       <td class="td-no">${idx+1}</td>
+      <td class="td-m">${s.nis}</td>
+      <td class="td-n">${s.nama}</td>
+      <td>${s.kelas}</td>
+      <td><span class="${s.gender === 'L' ? 'g-m' : 'g-f'}"><i class="fas ${s.gender === 'L' ? 'fa-mars' : 'fa-venus'}"></i> ${s.gender === 'L' ? 'Laki' : 'Perempuan'}</span></td>
+      <td>${s.universitas ? `<span class="univ-tag">${s.universitas}</span>` : '<span class="td-nil">—</span>'}</td>
+      <td>${s.jurusan || '<span class="td-nil">—</span>'}</td>
+    </tr>
+  `).join('');
+}
+
+// Render halaman PTN
+function renderPtn() {
+  const ptnStudents = getPtnData();
+  ptnCountBanner.innerText = ptnStudents.length;
+  if (ptnStudents.length === 0) {
+    ptnCardsContainer.innerHTML = `<div class="empty"><div class="empty-ico"><i class="fas fa-trophy"></i></div><div class="empty-t">Belum ada data PTN</div><div class="empty-s">Siswa yang diterima PTN akan muncul di sini</div></div>`;
+  } else {
+    ptnCardsContainer.innerHTML = ptnStudents.map(s => `
+      <div class="sc ptn">
+        <div class="sc-av" style="background: linear-gradient(135deg,#f59e0b,#b45309);">${s.nama.charAt(0)}</div>
+        <div class="sc-body">
+          <div class="sc-name">${s.nama}</div>
+          <div class="sc-tags">
+            <span class="tag t-nis">NIS: ${s.nis}</span>
+            <span class="tag t-cls">${s.kelas}</span>
+          </div>
+          <div class="sc-row"><i class="fas fa-university"></i><span class="sc-univ-txt" style="color:var(--amber)">${s.universitas}</span></div>
+          <div class="sc-row"><i class="fas fa-book-open"></i><span>${s.jurusan}</span></div>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+// Update semua tampilan & statistik global
+function updateAll() {
+  const totalSiswa = students.length;
+  const totalPtn = getPtnData().length;
+  const totalLaki = students.filter(s => s.gender === "L").length;
+  const totalPerempuan = students.filter(s => s.gender === "P").length;
+  
+  statSiswa.innerText = totalSiswa;
+  statPtn.innerText = totalPtn;
+  footerSiswa.innerText = totalSiswa;
+  footerPtn.innerText = totalPtn;
+  footerLk.innerText = totalLaki;
+  footerPr.innerText = totalPerempuan;
+  
+  if (currentPage === "all") {
+    renderAll();
+  } else {
+    renderPtn();
+  }
+}
+
+// Event handlers
+function onSearchInput(e) {
+  currentSearch = e.target.value;
+  updateAll();
+}
+
+function onKelasClick(kelas) {
+  currentKelas = kelas;
+  // Update active class pada tombol kelas
+  document.querySelectorAll(".ktab").forEach(btn => {
+    if (btn.dataset.kelas === kelas) btn.classList.add("on");
+    else btn.classList.remove("on");
+  });
+  updateAll();
+}
+
+function onGenderClick(gender) {
+  currentGender = gender;
+  document.querySelectorAll(".chip").forEach(chip => {
+    if (chip.dataset.gender === gender) chip.classList.add("active");
+    else chip.classList.remove("active");
+  });
+  updateAll();
+}
+
+function onNavClick(page) {
+  currentPage = page;
+  if (page === "all") {
+    pageAll.classList.remove("hidden");
+    pagePtn.classList.add("hidden");
+  } else {
+    pageAll.classList.add("hidden");
+    pagePtn.classList.remove("hidden");
+    renderPtn();
+  }
+  navButtons.forEach(btn => {
+    if (btn.dataset.page === page) btn.classList.add("on");
+    else btn.classList.remove("on");
+  });
+  updateAll(); // update statistik tetap
+}
+
+// Generate tombol kelas
+function generateKelasTabs() {
+  const kelasUnik = [...new Set(students.map(s => s.kelas))];
+  let html = `<button class="ktab on" data-kelas="all">Semua Kelas</button>`;
+  kelasUnik.forEach(kelas => {
+    html += `<button class="ktab" data-kelas="${kelas}">${kelas}</button>`;
+  });
+  kelasContainer.innerHTML = html;
+  document.querySelectorAll(".ktab").forEach(btn => {
+    btn.addEventListener("click", () => onKelasClick(btn.dataset.kelas));
+  });
+}
+
+// Generate footer kelas list
+function generateFooterKelas() {
+  let html = "";
+  for (const [kelas, info] of Object.entries(kelasData)) {
+    html += `<div class="fkelas"><div><div class="fk-name">${kelas}</div><div class="fk-wali">${info.wali}</div></div><div class="fk-cnt">${info.jumlah} siswa</div></div>`;
+  }
+  footerKelasList.innerHTML = html;
+}
+
+// Inisialisasi event listeners
+function init() {
+  generateKelasTabs();
+  generateFooterKelas();
+  
+  searchInput.addEventListener("input", onSearchInput);
+  document.querySelectorAll(".chip").forEach(chip => {
+    chip.addEventListener("click", () => onGenderClick(chip.dataset.gender));
+  });
+  navButtons.forEach(btn => {
+    btn.addEventListener("click", () => onNavClick(btn.dataset.page));
+  });
+  
+  // Set default active gender
+  currentGender = "all";
+  document.querySelector('.chip[data-gender="all"]').classList.add("active");
+  
+  updateAll();
+  
+  // Hilangkan splash setelah 0.8 detik
+  setTimeout(() => {
+    splash.classList.add("out");
+  }, 800);
+}
+
+// Start
+init();      <td class="td-no">${idx+1}</td>
       <td class="td-m">${s.nis}</td>
       <td class="td-n">${s.nama}</td>
       <td>${s.kelas}</td>
