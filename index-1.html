@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>SearchMe — Data Wisudawan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="loader-wrap">
+      <div class="loader-ring"></div>
+      <p class="loader-text">Memuat data<span class="dots">...</span></p>
+    </div>
+  </div>
+
+  <!-- Background orbs -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <div class="brand-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <span class="brand-name">Search<span class="brand-accent">Me</span></span>
+      </div>
+      <div class="nav-links">
+        <button id="navPage1" class="nav-btn active" data-page="page1">
+          <i class="fas fa-search"></i>
+          <span>Search</span>
+        </button>
+        <button id="navPage2" class="nav-btn" data-page="page2">
+          <i class="fas fa-layer-group"></i>
+          <span>Per Kelas</span>
+        </button>
+        <button id="navPage3" class="nav-btn" data-page="page3">
+          <i class="fas fa-trophy"></i>
+          <span>Lulus PTN</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-wrap">
+
+    <!-- PAGE 1: SEARCH -->
+    <section id="page1" class="page-section">
+      <div class="hero-card">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-content">
+          <div class="hero-badge"><i class="fas fa-star"></i> Data Wisudawan 2025</div>
+          <h1 class="hero-title">Temukan<br><span class="hero-gradient">Wisudawan</span><br>Impianmu</h1>
+          <p class="hero-sub">Cari berdasarkan nama atau nomor induk siswa</p>
+        </div>
+        <div class="search-hero-wrap">
+          <div class="search-box">
+            <i class="fas fa-search search-ico"></i>
+            <input type="text" id="globalSearchInput" placeholder="Ketik nama atau NIS..." class="search-input-field" autocomplete="off">
+            <div class="search-glow"></div>
+          </div>
+        </div>
+        <div class="hero-deco-circle c1"></div>
+        <div class="hero-deco-circle c2"></div>
+      </div>
+
+      <div id="searchLoading" class="loading-cards hidden">
+        <div class="mini-loader"></div>
+      </div>
+
+      <div id="searchResults" class="cards-grid"></div>
+    </section>
+
+    <!-- PAGE 2: PER KELAS -->
+    <section id="page2" class="page-section hidden">
+      <div class="page-header">
+        <div class="page-icon-wrap blue">
+          <i class="fas fa-layer-group"></i>
+        </div>
+        <div>
+          <h2 class="page-title">Data Per Kelas</h2>
+          <p class="page-sub">Pilih kelas untuk melihat daftar siswa</p>
+        </div>
+      </div>
+
+      <div class="kelas-tabs-wrap" id="kelasTabs"></div>
+
+      <div id="kelasInfo" class="kelas-info-bar"></div>
+
+      <div class="table-outer">
+        <table class="data-table" id="kelasTable">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>NIS</th>
+              <th>Nama Siswa</th>
+              <th>L/P</th>
+              <th>Orang Tua</th>
+              <th>Universitas</th>
+            </tr>
+          </thead>
+          <tbody id="kelasTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PAGE 3: LULUS PTN -->
+    <section id="page3" class="page-section hidden">
+      <div class="page-header">
+        <div class="page-icon-wrap gold">
+          <i class="fas fa-trophy"></i>
+        </div>
+        <div>
+          <h2 class="page-title">Lulus Perguruan Tinggi</h2>
+          <p class="page-sub">Wisudawan yang melanjutkan ke PTN / PTS</p>
+        </div>
+      </div>
+
+      <div id="ptnCount" class="ptn-counter"></div>
+      <div id="ptnList" class="cards-grid"></div>
+    </section>
+
+  </main>
+
+  <script src="data.js"></script>
+  <script>
+    // ─── Loading
+    setTimeout(() => {
+      const overlay = document.getElementById('loadingOverlay');
+      overlay.style.opacity = '0';
+      overlay.style.pointerEvents = 'none';
+      setTimeout(() => overlay.style.display = 'none', 500);
+    }, 900);
+
+    // ─── Build allStudents
+    let allStudents = [];
+    for (const [fase, kelas] of Object.entries(wisudaData)) {
+      allStudents.push(...kelas.students.map(s => ({
+        ...s, fase, waliKelas: kelas.wali, totalKelas: kelas.total
+      })));
+    }
+
+    function getInitials(name) {
+      return name.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase();
+    }
+
+    const avatarColors = [
+      ['#6366f1','#a855f7'], ['#0ea5e9','#06b6d4'], ['#10b981','#34d399'],
+      ['#f59e0b','#fb923c'], ['#ef4444','#f43f5e'], ['#8b5cf6','#6366f1']
+    ];
+    function getAvatarColor(name) {
+      const i = name.charCodeAt(0) % avatarColors.length;
+      return avatarColors[i];
+    }
+
+    // ─── PAGE 1: SEARCH CARDS
+    function renderSearchCards(searchTerm) {
+      const container = document.getElementById('searchResults');
+      const loading   = document.getElementById('searchLoading');
+      loading.classList.remove('hidden');
+      container.innerHTML = '';
+      setTimeout(() => {
+        const term = searchTerm.trim().toLowerCase();
+        const filtered = term
+          ? allStudents.filter(s => s.nama.toLowerCase().includes(term) || s.induk.includes(term))
+          : allStudents;
+        loading.classList.add('hidden');
+        if (filtered.length === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-icon"><i class="fas fa-user-slash"></i></div>
+              <p class="empty-title">Tidak ditemukan</p>
+              <p class="empty-sub">Coba kata kunci lain</p>
+            </div>`;
+          return;
+        }
+        container.innerHTML = filtered.map((s, idx) => {
+          const [c1, c2] = getAvatarColor(s.nama);
+          return `
+          <div class="student-card" style="animation-delay:${idx * 0.025}s">
+            <div class="sc-avatar" style="background:linear-gradient(135deg,${c1},${c2})">${getInitials(s.nama)}</div>
+            <div class="sc-body">
+              <h3 class="sc-name">${s.nama}</h3>
+              <div class="sc-badges">
+                <span class="badge badge-nis">NIS ${s.induk}</span>
+                <span class="badge ${s.gender === 'L' ? 'badge-male' : 'badge-female'}">${s.gender === 'L' ? '♂ Laki-laki' : '♀ Perempuan'}</span>
+                <span class="badge badge-kelas">${s.fase}</span>
+              </div>
+              ${s.ortu ? `<div class="sc-ortu"><i class="fas fa-user-friends"></i> ${s.ortu}</div>` : ''}
+              ${s.univ ? `<div class="sc-univ"><i class="fas fa-university"></i> ${s.univ}${s.jurusan ? ` · <span class="sc-jurusan">${s.jurusan}</span>` : ''}</div>` : ''}
+            </div>
+          </div>`;
+        }).join('');
+      }, 150);
+    }
+
+    // ─── PAGE 2: KELAS
+    let currentKelas = null;
+    function renderKelasTabs() {
+      const container = document.getElementById('kelasTabs');
+      const keys = Object.keys(wisudaData);
+      if (!currentKelas) currentKelas = keys[0];
+      container.innerHTML = keys.map(fase => `
+        <button class="kelas-tab-btn ${currentKelas === fase ? 'active' : ''}" onclick="selectKelas('${fase}')">${fase}</button>
+      `).join('');
+    }
+    function selectKelas(fase) {
+      currentKelas = fase;
+      renderKelasTabs();
+      renderKelasTable();
+    }
+    function renderKelasTable() {
+      const kelas = wisudaData[currentKelas];
+      if (!kelas) return;
+      document.getElementById('kelasInfo').innerHTML = `
+        <div class="kelas-stat"><i class="fas fa-chalkboard-user"></i> <strong>Wali Kelas:</strong> ${kelas.wali}</div>
+        <div class="kelas-stat-nums">
+          <span class="stat-chip total"><i class="fas fa-users"></i> ${kelas.students.length} Siswa</span>
+          <span class="stat-chip male"><i class="fas fa-mars"></i> ${kelas.putra} Putra</span>
+          <span class="stat-chip female"><i class="fas fa-venus"></i> ${kelas.putri} Putri</span>
+        </div>`;
+      document.getElementById('kelasTableBody').innerHTML = kelas.students.map(s => `
+        <tr>
+          <td class="td-no">${s.no}</td>
+          <td class="td-mono">${s.induk}</td>
+          <td class="td-name">${s.nama}</td>
+          <td>${s.gender === 'L'
+            ? '<span class="gender-badge male"><i class="fas fa-mars"></i> L</span>'
+            : '<span class="gender-badge female"><i class="fas fa-venus"></i> P</span>'}</td>
+          <td class="td-ortu">${s.ortu || '<span class="td-empty">—</span>'}</td>
+          <td>${s.univ ? `<span class="univ-chip">${s.univ}</span>` : '<span class="td-empty">—</span>'}</td>
+        </tr>`).join('');
+    }
+
+    // ─── PAGE 3: PTN
+    function renderPTN() {
+      const ptnStudents = allStudents.filter(s => s.univ && s.univ.trim() !== "");
+      document.getElementById('ptnCount').innerHTML = `
+        <i class="fas fa-graduation-cap"></i>
+        <strong>${ptnStudents.length}</strong> wisudawan melanjutkan ke Perguruan Tinggi`;
+      const container = document.getElementById('ptnList');
+      if (!ptnStudents.length) {
+        container.innerHTML = `<div class="empty-state"><div class="empty-icon"><i class="fas fa-school"></i></div><p class="empty-title">Belum ada data PTN</p></div>`;
+        return;
+      }
+      container.innerHTML = ptnStudents.map((s, idx) => {
+        const [c1, c2] = getAvatarColor(s.nama);
+        return `
+        <div class="student-card ptn-card" style="animation-delay:${idx * 0.025}s">
+          <div class="sc-avatar ptn-avatar" style="background:linear-gradient(135deg,${c1},${c2})">${getInitials(s.nama)}</div>
+          <div class="sc-body">
+            <h3 class="sc-name">${s.nama}</h3>
+            <div class="sc-badges">
+              <span class="badge badge-nis">NIS ${s.induk}</span>
+              <span class="badge badge-kelas">${s.fase}</span>
+            </div>
+            <div class="sc-univ ptn-univ"><i class="fas fa-university"></i> ${s.univ}</div>
+            ${s.jurusan ? `<div class="sc-jurusan-wrap"><i class="fas fa-book-open"></i> ${s.jurusan}</div>` : ''}
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    // ─── NAV
+    function showPage(pageId) {
+      document.querySelectorAll('.page-section').forEach(p => p.classList.add('hidden'));
+      document.getElementById(pageId).classList.remove('hidden');
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.page === pageId);
+      });
+      if (pageId === 'page1') renderSearchCards(document.getElementById('globalSearchInput').value);
+      else if (pageId === 'page2') { renderKelasTabs(); renderKelasTable(); }
+      else if (pageId === 'page3') renderPTN();
+    }
+
+    document.getElementById('navPage1').addEventListener('click', () => showPage('page1'));
+    document.getElementById('navPage2').addEventListener('click', () => showPage('page2'));
+    document.getElementById('navPage3').addEventListener('click', () => showPage('page3'));
+    document.getElementById('globalSearchInput').addEventListener('input', e => renderSearchCards(e.target.value));
+
+    // Init
+    renderKelasTabs();
+    renderKelasTable();
+    renderPTN();
+    renderSearchCards('');
+    showPage('page1');
+  </script>
+</body>
+</html>
